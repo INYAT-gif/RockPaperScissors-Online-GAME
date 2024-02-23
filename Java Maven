@@ -1,0 +1,57 @@
+package org.INYAT;
+import java.util.Scanner;
+
+public class RockPaperScissors {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String[] choices = {"rock", "paper", "scissors"};
+
+        System.out.println("Welcome to Rock, Paper, Scissors!");
+
+        boolean playAgain = true;
+        while (playAgain) {
+            System.out.println("Enter your choice: rock, paper, or scissors.");
+
+            String playerChoice = scanner.nextLine().toLowerCase();
+
+            if (!isValidChoice(playerChoice, choices)) {
+                System.out.println("Invalid choice. Please enter rock, paper, or scissors.");
+                continue;
+            }
+
+            int computerIndex = (int) (Math.random() * 3);
+            String computerChoice = choices[computerIndex];
+
+            System.out.println("Computer chooses: " + computerChoice);
+
+            if (playerChoice.equals(computerChoice)) {
+                System.out.println("It's a tie!");
+            } else if ((playerChoice.equals("rock") && computerChoice.equals("scissors")) ||
+                    (playerChoice.equals("paper") && computerChoice.equals("rock")) ||
+                    (playerChoice.equals("scissors") && computerChoice.equals("paper"))) {
+                System.out.println("You win!");
+            } else {
+                System.out.println("Computer wins!");
+            }
+
+            System.out.println("Do you want to play again? (yes/no)");
+            String playAgainResponse = scanner.nextLine().toLowerCase();
+            if (!playAgainResponse.equals("yes")) {
+                playAgain = false;
+            }
+        }
+
+        System.out.println("Thank you for playing Rock, Paper, Scissors!");
+        scanner.close();
+    }
+
+    public static boolean isValidChoice(String choice, String[] validChoices) {
+        for (String validChoice : validChoices) {
+            if (choice.equals(validChoice)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
